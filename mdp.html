@@ -2,100 +2,198 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            var t = localStorage.getItem("healme-theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heal Me</title>
+    <title>Multiple Disease Predictor — Heal Me</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
+    <link rel="icon" type="image/png" href="images/hm.png">
     <link rel="stylesheet" href="mdp.css">
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css">
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
     <div class="hero">
-        <nav><!--  -->
+        <nav>
             <img src="images/hm.png" alt="Heal Me" class="logo">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="healme.html">Home</a></li>
+                <li><a href="healme.html#services">Services</a></li>
+                <li><a href="blogs.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-            <img src="images/hm.png" alt="user" class="user-pic"
-                onclick="toggleMenu()">
+            <button class="theme-toggle-nav" aria-label="Toggle dark mode">🌙</button>
+            <img src="images/hm.png" alt="user" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
                 <div class="sub-menu">
                     <div class="user-info">
                         <img src="images/hm.png">
-                        <h3>Heal Me</h3>
+                        <h3 id="navUserName">Guest</h3>
                     </div>
                     <hr>
-                    <a href="/HTML/edit_profile.html" class="sub-menu-link">
-                        <img src="images/profile.png">
-                        <p>Edit Profile</p>
-                        <span>></span>
-                    </a>
-                    <a href="/HTML/setting.html" class="sub-menu-link">
-                        <img src="images/setting.png">
-                        <p>Settings & Privacy</p>
-                        <span>></span>
-                    </a>
-                    <a href="/HTML/contact.html" class="sub-menu-link">
+                    <a href="blogs.html" class="sub-menu-link">
                         <img src="images/help.png">
-                        <p>Help & Support</p>
-                        <span>></span>
+                        <p>Health Blogs</p>
+                        <span>&gt;</span>
                     </a>
-                    <a href="#" class="sub-menu-link">
+                    <a href="contact.html" class="sub-menu-link">
+                        <img src="images/setting.png">
+                        <p>Help & Support</p>
+                        <span>&gt;</span>
+                    </a>
+                    <a href="#" id="logoutLink" class="sub-menu-link">
                         <img src="images/logout.png">
                         <p>Logout</p>
-                        <span>></span>
+                        <span>&gt;</span>
                     </a>
                 </div>
             </div>
         </nav>
-        <div>
-            <py-script src="dfs.py"></py-script>
+
+        <div class="symptom-panel">
+            <h1>Multiple Disease Predictor</h1>
+            <p class="subtitle">Type or pick your symptoms below. This runs fully in your browser — no data leaves
+                your device.</p>
+
+            <input type="text" id="symptomInput" class="symptom-input"
+                placeholder="Start typing a symptom, e.g. fever, cough, headache…" autocomplete="off">
+            <div class="suggestions" id="suggestions"></div>
+
+            <p style="margin-top:20px; font-weight:600; color:#0693a2;">Selected symptoms</p>
+            <div class="selected-symptoms" id="selectedSymptoms">
+                <span style="color:#999; font-size:0.9rem;">None yet — add at least one symptom above.</span>
+            </div>
+
+            <button class="btn-check" id="checkBtn" disabled>Check possible conditions</button>
+
+            <div id="results"></div>
+
+            <p class="disclaimer">This tool gives a rough, educational estimate based on a small symptom–condition
+                weight table. It is <strong>not a medical diagnosis</strong>. Please consult a qualified doctor for
+                any real health concern.</p>
         </div>
     </div>
-    <p class="dfs">
-    <py-script href="dfs.py"></py-script>
-</p>
+
+    <footer id="footer">
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h1 class="logo-text">Heal Me</h1>
+                    <p id="ps">
+                        Heal Me is a platform that provides a wide range of health services to users. It is a
+                        one-stop solution for all your health-related queries.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="symptoms.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        let subMenu = document.getElementById("subMenu");
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+
+        const allSymptoms = Object.keys(SYMPTOM_DB).sort();
+        let selected = new Set();
+
+        const input = document.getElementById("symptomInput");
+        const suggestionsBox = document.getElementById("suggestions");
+        const selectedBox = document.getElementById("selectedSymptoms");
+        const checkBtn = document.getElementById("checkBtn");
+        const resultsBox = document.getElementById("results");
+
+        function renderSuggestions(filter) {
+            suggestionsBox.innerHTML = "";
+            const list = filter
+                ? allSymptoms.filter(s => s.includes(filter.toLowerCase())).slice(0, 20)
+                : allSymptoms.slice(0, 20);
+            list.forEach(symptom => {
+                const chip = document.createElement("span");
+                chip.className = "chip" + (selected.has(symptom) ? " active" : "");
+                chip.textContent = symptom;
+                chip.onclick = () => toggleSymptom(symptom);
+                suggestionsBox.appendChild(chip);
+            });
+        }
+
+        function renderSelected() {
+            selectedBox.innerHTML = "";
+            if (selected.size === 0) {
+                selectedBox.innerHTML = '<span style="color:#999; font-size:0.9rem;">None yet — add at least one symptom above.</span>';
+                checkBtn.disabled = true;
+                return;
+            }
+            checkBtn.disabled = false;
+            selected.forEach(symptom => {
+                const chip = document.createElement("span");
+                chip.className = "chip active";
+                chip.textContent = symptom;
+                chip.onclick = () => toggleSymptom(symptom);
+                selectedBox.appendChild(chip);
+            });
+        }
+
+        function toggleSymptom(symptom) {
+            if (selected.has(symptom)) selected.delete(symptom);
+            else selected.add(symptom);
+            renderSelected();
+            renderSuggestions(input.value);
+        }
+
+        input.addEventListener("input", () => renderSuggestions(input.value));
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                const exact = allSymptoms.find(s => s === input.value.trim().toLowerCase());
+                if (exact) {
+                    toggleSymptom(exact);
+                    input.value = "";
+                    renderSuggestions("");
+                }
+            }
+        });
+
+        checkBtn.addEventListener("click", () => {
+            const scores = {};
+            selected.forEach(symptom => {
+                const diseases = SYMPTOM_DB[symptom];
+                if (!diseases) return;
+                Object.entries(diseases).forEach(([disease, weight]) => {
+                    scores[disease] = (scores[disease] || 0) + weight;
+                });
+            });
+            const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]).slice(0, 6);
+            resultsBox.innerHTML = "";
+            if (ranked.length === 0) {
+                resultsBox.innerHTML = "<p>No matching conditions found for the selected symptoms.</p>";
+                return;
+            }
+            const heading = document.createElement("h3");
+            heading.style.marginBottom = "12px";
+            heading.style.color = "#0693a2";
+            heading.textContent = "Possible conditions, most likely first:";
+            resultsBox.appendChild(heading);
+            ranked.forEach(([disease], i) => {
+                const card = document.createElement("div");
+                card.className = "result-card";
+                card.innerHTML = `<span class="rank">#${i + 1}</span>${disease}`;
+                resultsBox.appendChild(card);
+            });
+        });
+
+        renderSuggestions("");
+    </script>
 </body>
-<footer>
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h1 class="logo-text">Heal Me</h1>
-                <p>
-                    Heal Me is a platform that provides a wide range of health services to users. It is a one-stop
-                    solution for all your health-related queries.
-                </p>
-                <div class="contact">
-                    <span><i class="fas fa-phone"></i> &nbsp; +91-123-456-789</span>
-                    <span><i class="fas fa-envelope"></i> &nbsp;
-<script>
-    let subMenu = document.getElementById("subMenu")
-    alert('Enter Your Symptoms : eg. fever, cough, headache, etc.')
-    function toggleMenu() {
-        subMenu.classList.toggle("open-menu");
-    }
-</script>
-<style>
-    .dfs{align-items: center;
-    justify-content: center;
-    display: flex;
-    font-size: 20px;
-    font-weight: 500;
-    color: #fff;}
-</style>
-
-
-
-
 
 </html>
