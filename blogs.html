@@ -2,17 +2,25 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            var t = localStorage.getItem("healme-theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
+    <title>Blogs — Heal Me</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="stylesheet" href="blogs.css">
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css">
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="icon" type="image/png" href="images/hm.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="blogs.css">
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
@@ -21,186 +29,129 @@
             <img src="images/hm.png" alt="Heal Me" class="logo">
             <ul>
                 <li><a href="healme.html">Home</a></li>
-                <li><a href="healme.html">Services</a></li>
+                <li><a href="healme.html#services">Services</a></li>
                 <li><a href="blogs.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <img src="images/hm.png" alt="user" class="user-pic"
-                onclick="toggleMenu()">
+            <button class="theme-toggle-nav" aria-label="Toggle dark mode">🌙</button>
+            <img src="images/hm.png" alt="user" class="user-pic" onclick="toggleMenu()">
             <div class="sub-menu-wrap" id="subMenu">
                 <div class="sub-menu">
                     <div class="user-info">
                         <img src="images/hm.png">
-                        <h3>Heal Me</h3>
+                        <h3 id="navUserName">Guest</h3>
                     </div>
                     <hr>
-                    <a href="/HTML/edit_profile.html" class="sub-menu-link">
-                        <img src="images/profile.png">
-                        <p>Edit Profile</p>
-                        <span>></span>
-                    </a>
-                    <a href="/HTML/setting.html" class="sub-menu-link">
-                        <img src="images/setting.png">
-                        <p>Settings & Privacy</p>
-                        <span>></span>
-                    </a>
-                    <a href="/HTML/contact.html" class="sub-menu-link">
+                    <a href="contact.html" class="sub-menu-link">
                         <img src="images/help.png">
                         <p>Help & Support</p>
-                        <span>></span>
+                        <span>&gt;</span>
                     </a>
-                    <a href="#" class="sub-menu-link">
+                    <a href="#" id="logoutLink" class="sub-menu-link">
                         <img src="images/logout.png">
                         <p>Logout</p>
-                        <span></span>
+                        <span>&gt;</span>
                     </a>
                 </div>
             </div>
-        </nav> 
+        </nav>
+
         <div class="blogs">
             <h1><strong><u>Explore Our Blogs</u></strong></h1>
             <p><strong><u>Insightful Perspectives, Engaging Content</u></strong></p>
-        
-        <div id="blog-cards">
-            <div class="about-card">
-                <img class="blog12" src="images/c1.jpeg">
-                <div class="card__content">
-                    <p ><strong>Taking care of Mental Health  </strong></p>
-                    <p >Mental health care is essential for fostering well-being, providing support, and ensuring that individuals obtain the necessary resources and therapy to properly manage their mental health difficulties.</p>
-                   
+
+            <div id="blog-cards">
+                <div class="about-card">
+                    <img class="blog12" src="images/c1.jpeg" alt="Mental health blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>Taking care of Mental Health</strong></p>
+                        <p class="card__description">Mental health care is essential for fostering well-being,
+                            providing support, and ensuring that individuals obtain the necessary resources and
+                            therapy to properly manage their mental health difficulties.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-card">
-                <img class="blog12" src="images/c2.jpeg">
-                <div class="card__content">
-                    <p class="card__title"><strong>The Wellness Blueprint</strong></p>
-                    <p class="card__description">
-                    <p>Balanced nutrition and regular physical activity are necessary for achieving peak health and energy.Nutrition fuels your body, while exercise activities build it, resulting in a healthy balance that promotes general health and well-being.</p>
+                <div class="about-card">
+                    <img class="blog12" src="images/c2.jpeg" alt="Wellness blueprint blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>The Wellness Blueprint</strong></p>
+                        <p class="card__description">Balanced nutrition and regular physical activity are necessary
+                            for achieving peak health and energy. Nutrition fuels your body, while exercise builds
+                            it, resulting in a healthy balance that promotes overall well-being.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-card">
-                <img class="blog12" src="images/c3.jpeg">
-                <div class="card__content">
-                    <p class="card__title"><strong>Telemedicine Advancements</strong></p>
-                    <p class="card__description">Telemedicine developments are transforming healthcare delivery by harnessing technology to enable distant consultations, increase access to care, and improve patient outcomes, particularly in underserved areas.</p>
-                
+                <div class="about-card">
+                    <img class="blog12" src="images/c3.jpeg" alt="Telemedicine blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>Telemedicine Advancements</strong></p>
+                        <p class="card__description">Telemedicine developments are transforming healthcare delivery
+                            by harnessing technology to enable distant consultations, increase access to care, and
+                            improve patient outcomes, particularly in underserved areas.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-card">
-                <img class="blog12" src="images/c4.jpeg">
-                <div class="card__content">
-                    <p class="card__title"><strong>Empowering Patients Voices</strong></p>
-                    <p class="card__description">Empowering patient voices involves listening to their experiences,
-                        concerns, and feedback, fostering a collaborative healthcare environment that prioritizes
-                        personalized care and shared decision-making for better outcomes</p>
-            
+                <div class="about-card">
+                    <img class="blog12" src="images/c4.jpeg" alt="Patient empowerment blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>Empowering Patients' Voices</strong></p>
+                        <p class="card__description">Empowering patient voices involves listening to their
+                            experiences, concerns, and feedback, fostering a collaborative healthcare environment
+                            that prioritizes personalized care and shared decision-making.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-card">
-                <img class="blog12" src="images/c5.jpeg">
-                <div class="card__content">
-                    <p class="card__title"><strong>Healthcare and AI</strong></p>
-                    <p class="card__description">Healthcare and AI are transforming the industry, enabling faster
-                        diagnostics, personalized treatments, and improved patient outcomes through data-driven insights and
-                        innovative technologies, revolutionizing the way healthcare is delivered and enhancing patient
-                        outcomes.</p>
-                
+                <div class="about-card">
+                    <img class="blog12" src="images/c5.jpeg" alt="Healthcare and AI blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>Healthcare and AI</strong></p>
+                        <p class="card__description">Healthcare and AI are transforming the industry, enabling
+                            faster diagnostics, personalized treatments, and improved patient outcomes through
+                            data-driven insights and innovative technologies.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-card">
-                <img class="blog12" src="images/c6.jpeg">
-                <div class="card__content">
-                    <p class="card__title"><Strong>Global Health Care</Strong></p>
-                    <p class="card__description">Healthcare and AI are driving unprecedented advancements, optimizing
-                        medical processes, enhancing patient care, and revolutionizing how we approach healthcare delivery
-                        through data-driven decision-making and innovative technologies</p>
-                    
+                <div class="about-card">
+                    <img class="blog12" src="images/c6.jpeg" alt="Global healthcare blog cover">
+                    <div class="card__content">
+                        <p class="card__title"><strong>Global Health Care</strong></p>
+                        <p class="card__description">Healthcare and AI are driving unprecedented advancements,
+                            optimizing medical processes, enhancing patient care, and revolutionizing how we
+                            approach healthcare delivery.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        
-   
+    </div>
+
     <footer id="footer">
         <div class="container-fluid">
             <div class="footer-content">
                 <div class="footer-section about">
                     <h1 class="logo-text">Heal Me</h1>
                     <p id="ps">
-                        Heal Me is a platform that provides a wide range of health services to users. It is a one-stop
-                        solution for all your health-related queries.
+                        Heal Me is a platform that provides a wide range of health services to users. It is a
+                        one-stop solution for all your health-related queries.
                     </p>
                 </div>
+            </div>
         </div>
-        
         <div class="social-icons mt-4">
-            <a class="fhov" target="_blank" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a class="fhov" target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
             &nbsp;
-            <a class="fhov" target="_blank" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a class="fhov" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
             &nbsp;
-            <a class="fhov" target="_blank" href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a class="fhov" target="_blank" href="https://x.com/"><i class="fab fa-twitter"></i></a>
             &nbsp;
-            <a class="fhov" target="_blank" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a class="fhov" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
             &nbsp;
-            <a class="fhov" target="_blank" href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+            <a class="fhov" target="_blank" href="https://github.com/"><i class="fab fa-github"></i></a>
         </div>
-        
     </footer>
-    <style>
-        footer{
-        background: #991a4baf;
-        padding: 15px 23px;
-        color: #fff;
-        text-align: center;
-        font-size: 28px;
-    }
-    .social-icons a{
-        color: #fff;
-        font-size: 30px;
-        
-    }
-    .fhov:hover{
-        color: #000;
-    }
-    .footer-content{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        font-size: large;
-    }
-    #ql{
-        font-size: 20px;
-        color: rgba(0, 0, 0, 0.668);
-        margin-top: 5px;
-        
-    }
-    .links{
-        flex: 1;
-        margin-right: 20px;
-        text-align: center;
-        justify-content: left;
-    }
-    .logo-text{
-        font-size: 30px;
-        font-weight: 500;
-        color: #fff;
-    }
-    #ps{
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.668);
-    }
-    .about{
-        flex: 1;
-        margin-right: 20px;
-        text-align: center;
-        justify-content: center;
-    }
-    </style>
+
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        let subMenu = document.getElementById("subMenu");
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
 </body>
-<script>
-    let subMenu = document.getElementById("subMenu")
-    function toggleMenu() {
-        subMenu.classList.toggle("open-menu");
-    }
-</script>
+
 </html>
