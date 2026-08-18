@@ -224,3 +224,39 @@ nav ul li a{
     bottom: 0;
     width: 100%;
 }
+/* Footer (matches #footer id used in the markup) */
+footer#footer {
+    background: #991a4baf;
+    padding: 15px 23px;
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: large;
+}
+.footer-content .about {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+}
+.footer-content .logo-text {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+.footer-content #ps {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.668);
+}
+.social-icons a {
+    color: #fff;
+    font-size: 30px;
+}
+.social-icons a.fhov:hover {
+    color: #000;
+}
