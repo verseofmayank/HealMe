@@ -174,49 +174,6 @@ nav ul li a{
             box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
         }
     }
-    .btn-home-2 {
-        height: 50px;
-        outline: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #e74885;
-        min-width: 200px;
-        border: 0;
-        border-radius: 4px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
-        box-sizing: border-box;
-        padding: 16px 20px;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-        overflow: hidden;
-        cursor: pointer;
-        width: 250px;
-        margin-top: 10px;
-    }
-    
-    .btn-home-2:hover {
-        opacity: .95;
-    }
-    
-    .btn-home-2 .animation {
-        border-radius: 100%;
-        animation: ripple 0.6s linear infinite;
-    }
-    
-    @keyframes ripple {
-        0% {
-            box-shadow: 0 0 0 0 rgba(190, 33, 33, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
-        }
-    
-        100% {
-            box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
-        }
-    }
-
 #services{
     display: flex;
     justify-content: center;
@@ -421,4 +378,56 @@ h1{
     font-size: 15px;
     margin-right:35%;
 
+}
+/* Footer */
+footer#footer {
+    background: #991a4baf;
+    padding: 15px 23px;
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: large;
+}
+.footer-content .about {
+    flex: 1;
+    margin-right: 20px;
+    text-align: center;
+    justify-content: center;
+}
+.footer-content .logo-text {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+.footer-content #ps {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.668);
+}
+.social-icons a {
+    color: #fff;
+    font-size: 30px;
+}
+.social-icons a.fhov:hover {
+    color: #000;
+}
+
+/* "Why choose us" superman illustration */
+.ques {
+    width: 20%;
+    height: auto;
+    margin-left: 70%;
+    position: relative;
+    top: 190px;
+}
+
+.btn-home-2:disabled {
+    background: #b3b3b3;
+    cursor: not-allowed;
+    opacity: 0.8;
 }
