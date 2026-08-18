@@ -1,17 +1,22 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
-.hero {
- /* Adjusted to accommodate the sidebar */
-    min-height: 100vh;
+
+body {
     background: #e58d8d76;
-    color: #525252;
-    
+    color: #2b2b2b;
 }
-nav{
+
+.hero {
+    min-height: 100vh;
+}
+
+nav {
     background: #0693a2;
     width: 100%;
     padding: 10px 10px;
@@ -19,38 +24,39 @@ nav{
     align-items: center;
     justify-content: space-between;
     position: relative;
-
 }
-.logo{
+
+.logo {
     margin-left: 20px;
     width: 70px;
     height: 64px;
 }
-.nav{
-    z-index: 1001;
-}
-.user-pic{
+
+.user-pic {
     width: 40px;
     border-radius: 50%;
     cursor: pointer;
     margin-left: 30px;
     margin-right: 20px;
 }
-nav ul{
+
+nav ul {
     width: 100%;
     text-align: right;
 }
-nav ul li{
+
+nav ul li {
     display: inline-block;
     list-style: none;
     margin: 10px 20px;
-
 }
-nav ul li a{
+
+nav ul li a {
     color: #fff;
     text-decoration: none;
 }
-.sub-menu-wrap{
+
+.sub-menu-wrap {
     position: absolute;
     top: 100%;
     right: 10%;
@@ -61,44 +67,52 @@ nav ul li a{
     z-index: 1;
 }
 
-.sub-menu-wrap.open-menu{
+.sub-menu-wrap.open-menu {
     max-height: 400px;
 }
 
-.sub-menu{
+.sub-menu {
     background: #fff;
     padding: 20px;
     margin: 10px;
+    border-radius: 8px;
 }
-.user-info{
+
+.user-info {
     display: flex;
     align-items: center;
 }
-.user-info h3{
+
+.user-info h3 {
     font-weight: 500;
 }
-.user-info img{
+
+.user-info img {
     width: 60px;
     border-radius: 50%;
     margin-right: 15px;
 }
-.sub-menu hr{
+
+.sub-menu hr {
     border: 0;
     height: 1px;
     width: 100%;
     background: #ccc;
     margin: 15px 0 10px;
 }
-.sub-menu-link{
+
+.sub-menu-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #525252;
     margin: 12px 0;
 }
-.sub-menu-link p{
+
+.sub-menu-link p {
     width: 100%;
 }
+
 .sub-menu-link img {
     width: 40px;
     background-color: #e5e5e5;
@@ -106,121 +120,139 @@ nav ul li a{
     padding: 8px;
     margin-right: 15px;
 }
-.sub-menu-link span{
+
+.sub-menu-link span {
     font-size: 22px;
-    transition: transform 0.5s;
-}
-.sub-menu-link:hover span{
-    transform: translateX(5px);
-
-}
-.sub-menu-link:hover p{
-    font-weight: 600;
-}
-.contact-container
-{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
 }
 
-.contact-left
-{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 20px;
+/* --- Symptom checker --- */
+.symptom-panel {
+    max-width: 780px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-.contact-left-title h2
-{
-   font-weight: 600;
-   color: #a363aa;
-   font-size: 40px;
-   margin-bottom: 5px;
+.symptom-panel h1 {
+    font-size: 1.8rem;
+    color: #0693a2;
+    margin-bottom: 8px;
 }
 
-.contact-left-title hr
-{
-    border: none;
-    width: 120px;
-    height: 5px;
-    background-color: #a363aa;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.contact-inputs
-{
-    width: 400px;
-    height: 50px;
-    border: none;
-    outline: none;
-    padding-left: 25px;
-    font-weight: 500;
+.symptom-panel p.subtitle {
     color: #666;
-    border-radius: 50px;
+    margin-bottom: 25px;
 }
 
-.contact-left textarea
-{
-    height: 140px;
-    padding-top: 15px;
-    border-radius: 20px;
+.symptom-input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
 }
 
-.contact-inputs:focus
-{
-    border: 2px solid #ff994f;
+.symptom-input:focus {
+    border-color: #0693a2;
 }
 
-.contact-inputs::placeholder
-{
-    border: #a9a9a9;
-}
-
-.contact-left button
-{
+.suggestions {
     display: flex;
-    align-items: center;
-    padding: 15px 30px;
-    font-size: 16px;
-    color: #fff;
-    gap: 10px;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(270deg,#ff994f,#fa6d86);
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    max-height: 130px;
+    overflow-y: auto;
+}
+
+.chip {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    font-size: 0.85rem;
     cursor: pointer;
+    transition: all 0.15s ease;
 }
 
-.contact-left button img
-{
-  height: 15px;
+.chip:hover {
+    background: #e0f4f5;
 }
 
-.contact-right img
-{
-    width: 500px;
-}
-
-@media(max-width:800px)
-{
-    .contact-inputs
-    {
-        width: 80vw;
-    }
-    .contact-right
-    {
-        display: none;
-    }
-}
-.footer{
+.chip.active {
     background: #0693a2;
     color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: bottom;
-    bottom: 0;
+    border-color: #0693a2;
+}
+
+.selected-symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+    min-height: 20px;
+}
+
+.selected-symptoms .chip.active {
+    padding-right: 10px;
+}
+
+.selected-symptoms .chip.active::after {
+    content: " ✕";
+    margin-left: 6px;
+}
+
+.btn-check {
+    margin-top: 10px;
+    height: 48px;
     width: 100%;
+    background: #40B3A2;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-check:hover {
+    opacity: 0.9;
+}
+
+.btn-check:disabled {
+    background: #b8c9c7;
+    cursor: not-allowed;
+}
+
+#results {
+    margin-top: 30px;
+}
+
+.result-card {
+    background: #f7fbfb;
+    border-left: 4px solid #0693a2;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+}
+
+.result-card .rank {
+    font-weight: 700;
+    color: #0693a2;
+    margin-right: 8px;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    border-top: 1px solid #eee;
+    padding-top: 14px;
 }
