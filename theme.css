@@ -1,0 +1,167 @@
+/* ===========================================================
+   HealMe — Shared theme system (light / dark)
+   Include this AFTER the page's own stylesheet on every page.
+   =========================================================== */
+
+:root {
+    --hm-bg: #ffffff;
+    --hm-text: #222222;
+    --hm-accent: #0693a2;
+    --hm-accent-2: #e74885;
+    --hm-card-bg: #ffffff;
+    --hm-shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Floating theme toggle button, present on every page --- */
+.theme-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 2000;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: var(--hm-accent, #0693a2);
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.08);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Small inline toggle variant (used inside nav bars) */
+.theme-toggle-nav {
+    background: rgba(255, 255, 255, 0.18);
+    border: none;
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    transition: background 0.2s ease;
+}
+
+.theme-toggle-nav:hover {
+    background: rgba(255, 255, 255, 0.32);
+}
+
+/* ===========================================================
+   DARK MODE
+   Activated when <html data-theme="dark">.
+   These rules override the legacy per-page stylesheets so we
+   don't have to touch every hard-coded color individually.
+   =========================================================== */
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+    background: #14181c !important;
+    color: #e7e7e7 !important;
+}
+
+/* Hero / page background sections */
+html[data-theme="dark"] .hero {
+    background: #1b2126 !important;
+    color: #e7e7e7 !important;
+}
+
+/* Navbars */
+html[data-theme="dark"] nav {
+    background: #0b3b42 !important;
+}
+
+/* Generic cards & panels used across pages */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .sub-menu,
+html[data-theme="dark"] .result-card,
+html[data-theme="dark"] .symptom-panel {
+    background: #20262b !important;
+    color: #e7e7e7 !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .card p,
+html[data-theme="dark"] .card h1,
+html[data-theme="dark"] .about-card p,
+html[data-theme="dark"] .card__title,
+html[data-theme="dark"] .card__description {
+    color: #d7d7d7 !important;
+}
+
+/* Headings & muted text */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] strong,
+html[data-theme="dark"] .home-text h1 {
+    color: #f2f2f2 !important;
+}
+
+html[data-theme="dark"] .home-text h2,
+html[data-theme="dark"] .hiw2,
+html[data-theme="dark"] #hiw {
+    color: #b8b8b8 !important;
+}
+
+/* Footer stays on-brand (dark magenta already dark enough) */
+html[data-theme="dark"] footer#footer {
+    background: #5c1030 !important;
+}
+
+/* Login / signup wrapper (style.css) */
+html[data-theme="dark"] body.auth-page {
+    background: #10141a !important;
+}
+
+html[data-theme="dark"] .wrapper {
+    background-color: rgba(0, 0, 0, 0.55) !important;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Contact form */
+html[data-theme="dark"] .contact-inputs {
+    background: #20262b !important;
+    color: #eee !important;
+    border-color: #3a4550 !important;
+}
+
+html[data-theme="dark"] .contact-inputs::placeholder {
+    color: #9aa4ad !important;
+}
+
+/* Symptom checker (mdp.html) */
+html[data-theme="dark"] .symptom-input {
+    background: #20262b !important;
+    color: #eee !important;
+    border-color: #3a4550 !important;
+}
+
+html[data-theme="dark"] .chip {
+    background: #2a3138 !important;
+    color: #d7d7d7 !important;
+    border-color: #3a4550 !important;
+}
+
+html[data-theme="dark"] .chip.active {
+    background: var(--hm-accent, #0693a2) !important;
+    color: #fff !important;
+}
