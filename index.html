@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="stylesheet" href="healme.css">
+    <link rel="stylesheet" href="theme.css">
+    <script>
+        (function () {
+            var t = localStorage.getItem("healme-theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
 </head>
 
 <body>
@@ -26,6 +34,7 @@
                 <li><a href="blogs.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="theme-toggle-nav" aria-label="Toggle dark mode">🌙</button>
         </nav>
         <div id="home">
             <div class="home-text">
@@ -37,7 +46,7 @@
                 <div class="home-buttons">
                     <button class="btn-home"><i class="animation"></i><a href="#hiw">What we have</a><i class="animation"></i>
                     </button>
-                    <button class="btn-login"><a href="login.html">Login</a>
+                    <button class="btn-login"><a href="login.html" id="loginNavLink">Login</a>
                     </button>
                 </div>
             </div>
@@ -103,6 +112,17 @@
             </div>
         </footer>
     </div>
+
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        const loginLink = document.getElementById("loginNavLink");
+        const user = HealMeAuth.currentUser();
+        if (user && loginLink) {
+            loginLink.textContent = "Dashboard";
+            loginLink.setAttribute("href", "healme.html");
+        }
+    </script>
 </body>
 
 </html>
