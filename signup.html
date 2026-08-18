@@ -2,40 +2,67 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            var t = localStorage.getItem("healme-theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", t);
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
+    <title>Sign Up — Heal Me</title>
+    <link rel="icon" type="image/png" href="images/hm.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
 </head>
 
-<body>
+<body class="auth-page">
 
     <div class="wrapper">
-        <form action="">
+        <form id="signupForm" novalidate>
             <h2>Signup</h2>
             <div class="input-group">
-                <span class="icon">
-                    <ion-icon name="person"></ion-icon>
-                </span>
-                <input type="text" placeholder="Full Name" required>
-                <br><br>
-                <input type="text" placeholder="Username" required>
+                <span class="icon"><i class="fas fa-id-card"></i></span>
+                <input type="text" id="signupFullName" placeholder="Full Name" required>
             </div>
             <div class="input-group">
-                <span class="icon">
-                    <ion-icon name="lock-closed"></ion-icon>
-                </span>
-                <input type="password" placeholder="Password" required>
+                <span class="icon"><i class="fas fa-user"></i></span>
+                <input type="text" id="signupUsername" placeholder="Username" required>
             </div>
-            <button type="submit" class="btn"><a class="none" href="login.html">Signup</a></button>
+            <div class="input-group">
+                <span class="icon"><i class="fas fa-lock"></i></span>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+            </div>
+            <div id="signupMessage" class="form-message"></div>
+            <button type="submit" class="btn">Signup</button>
             <div class="sign-link">
                 <p>Have an account? <a href="login.html" class="register-link">Login</a></p>
             </div>
         </form>
     </div>
 
-    
+    <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const fullName = document.getElementById("signupFullName").value;
+            const username = document.getElementById("signupUsername").value;
+            const password = document.getElementById("signupPassword").value;
+            const msg = document.getElementById("signupMessage");
+            const result = HealMeAuth.signup(fullName, username, password);
+            msg.textContent = result.message;
+            msg.className = "form-message show " + (result.ok ? "success" : "error");
+            if (result.ok) {
+                setTimeout(() => { window.location.href = "login.html"; }, 900);
+            }
+        });
+    </script>
 </body>
 
 </html>
